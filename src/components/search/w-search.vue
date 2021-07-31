@@ -4,7 +4,8 @@
       +e.INPUT.input(
         type="search"
         v-model="city"
-        @keyup.enter="getWeather"
+        @keyup.enter="getData($event)"
+        placeholder="Введите город..."
       )
 </template>
 
@@ -19,10 +20,12 @@ export default {
   },
   methods: {
     ...mapActions([
-        'GET_WEATHER'
+        'GET_DATA'
     ]),
-    getWeather() {
-      this.GET_WEATHER(this.city)
+    getData(e) {
+      this.GET_DATA(this.city)
+      this.$emit('getData')
+      e.target.blur();
     }
   }
 }
